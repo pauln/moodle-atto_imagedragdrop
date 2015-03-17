@@ -37,7 +37,7 @@ function xmldb_atto_imagedragdrop_install() {
 
     // Check the Moodle version; we shouldn't install if we're not on 2.7 or 2.8.
     $prefix = intval(substr($CFG->version, 0, 8));
-    if($prefix >= 20140527 && $prefix <= 20141110) {
+    if($prefix === "20140527" || $prefix === "20141110") {
 
         // Install as normal.
         if (!$pos) {
@@ -50,10 +50,10 @@ function xmldb_atto_imagedragdrop_install() {
         // Not on 2.7 or 2.8 - remove usage from toolbar config if it's present.
         if ($pos) {
             $toolbar = preg_replace('/(.+?=.+?)imagedragdrop($|\s|,)/m', '$1', $toolbar, 1);
-            set_config('toolbar', $toolbar, 'editor_atto');
         }
 
     }
 
+    set_config('toolbar', $toolbar, 'editor_atto');
     return true;
 }
